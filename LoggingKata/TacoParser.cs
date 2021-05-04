@@ -1,4 +1,6 @@
-﻿namespace LoggingKata
+﻿using System;
+
+namespace LoggingKata
 {
     /// <summary>
     /// Parses a POI file to locate all the Taco Bells
@@ -9,7 +11,7 @@
         
         public ITrackable Parse(string line)
         {
-            logger.LogInfo("Begin parsing");
+            //logger.LogInfo("Begin parsing");
 
             // Take your line and use line.Split(',') to split it up into an array of strings, separated by the char ','
             var cells = line.Split(',');
@@ -25,7 +27,14 @@
             // grab the latitude from your array at index 0
             // grab the longitude from your array at index 1
             // grab the name from your array at index 2
+            string latitude = cells[0];
+            var lat = Convert.ToDouble(latitude);
 
+
+            string longitude = cells[1];
+            var longit = Convert.ToDouble(longitude);
+            
+            string name = cells[2];
             // Your going to need to parse your string as a `double`
             // which is similar to parsing a string as an `int`
 
@@ -35,10 +44,23 @@
             // Then, you'll need an instance of the TacoBell class
             // With the name and point set correctly
 
+            var point = new Point
+            {
+                Latitude = lat,
+                Longitude = longit
+
+            };
+           
+            
+            var tacoBell = new TacoBell();
+
+            tacoBell.Location = point;
+            tacoBell.Name = name;
+
             // Then, return the instance of your TacoBell class
             // Since it conforms to ITrackable
 
-            return null;
+            return tacoBell;
         }
     }
 }

@@ -32,7 +32,9 @@ namespace LoggingKata
             // DON'T FORGET TO LOG YOUR STEPS
 
             // Now that your Parse method is completed, START BELOW ----------
-
+            ITrackable tacobell1 = null;
+            ITrackable tacobell2 = null;
+            double distance = 0;
             // TODO: Create two `ITrackable` variables with initial values of `null`. These will be used to store your two taco bells that are the farthest from each other.
             // Create a `double` variable to store the distance
 
@@ -40,7 +42,37 @@ namespace LoggingKata
 
             //HINT NESTED LOOPS SECTION---------------------
             // Do a loop for your locations to grab each location as the origin (perhaps: `locA`)
+            for (int i = 0; i < locations.Length; i++)
+            {
+                var locA = locations[i];
+                var cordA = new GeoCoordinate(locA.Location.Latitude, locA.Location.Longitude);
 
+                for (int a = 0; a < locations.Length; a++)
+                {
+                    var locB = locations[a];
+                    var cordB = new GeoCoordinate(locB.Location.Latitude, locB.Location.Longitude);
+
+
+                    if (cordA.GetDistanceTo(cordB) > distance)
+                    {
+                        distance = cordA.GetDistanceTo(cordB);
+                        tacobell1 = locA;
+                        tacobell2 = locB;
+
+                    }
+                   
+                }
+                
+               
+                
+
+          
+
+
+            }
+            var convers = (distance * .000621371192);
+
+            Console.WriteLine($"{tacobell1.Name} and {tacobell2.Name} and the distance is {convers}");
             // Create a new corA Coordinate with your locA's lat and long
 
             // Now, do another loop on the locations with the scope of your first loop, so you can grab the "destination" location (perhaps: `locB`)
